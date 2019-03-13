@@ -5,7 +5,14 @@ var app = express();
 
 var filePath = path.join(__dirname, "babajii.jpg");
 app.use(function(req, res) {
-    res.sendFile(filePath);
+    res.sendFile(filePath, function(err) {
+        if (err) {
+            console.error("File failed to send.");
+        }
+        else {
+            console.log("File sent!");
+        }
+    });
 });
 
 app.listen(3000, function() {
