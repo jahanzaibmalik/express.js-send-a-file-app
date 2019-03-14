@@ -3,16 +3,19 @@ var path = require("path");
 
 var app = express();
 
-var filePath = path.join(__dirname, "babajii.jpg");
-app.use(function(req, res) {
+var filePath = path.join(__dirname, "babaji.jpg");
+
+app.use(function(req, res, next) {
     res.sendFile(filePath, function(err) {
         if (err) {
-            console.error("File failed to send.");
-        }
-        else {
-            console.log("File sent!");
+            next(new Error("Error sending file!"));
         }
     });
+});
+
+app.use(function(err, req, res, next) {
+    console.error(err);
+    next(err);
 });
 
 app.listen(3000, function() {
