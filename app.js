@@ -18,6 +18,11 @@ app.use(function(err, req, res, next) {
     next(err);
 });
 
+app.use(function(err, req, res, next) {
+    res.status(500);
+    res.send("Internal server error!");
+});
+
 app.listen(3000, function() {
     console.log("App started on port 3000");
 });
